@@ -1,0 +1,47 @@
+# LaTeX temporary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.ps
+*.bcf
+*.run.xml
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+*.ist
+*.loa
+*.thm
+*.figlist
+*.makefile
+*.fuse*
+*.swp
+*.swo
+*~
+
+# PDF files (uncomment if you don't want to track PDFs)
+# *.pdf
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Fonts and logs
+missfont.log
