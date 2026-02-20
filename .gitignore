@@ -1,47 +1,39 @@
-# LaTeX temporary files
+
+# Core LaTeX auxiliary files
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.fdb_latexmk
 *.fls
 *.log
 *.out
-*.synctex.gz
+*.run.xml
 *.toc
 *.lof
 *.lot
 *.nav
 *.snm
+*.synctex.gz
+
+# Build directories
+_build/
+build/
+
+# latexmk / arara
 *.vrb
-*.dvi
-*.ps
-*.bcf
-*.run.xml
-*.idx
-*.ilg
-*.ind
-*.glo
-*.gls
-*.glg
-*.acn
-*.acr
-*.alg
-*.ist
-*.loa
-*.thm
-*.figlist
-*.makefile
-*.fuse*
+*.xdv
+
+# BibTeX
+*.bib.bak
+
+# Editors / OS
 *.swp
 *.swo
 *~
-
-# PDF files (uncomment if you don't want to track PDFs)
-# *.pdf
-
-# System files
 .DS_Store
-Thumbs.db
+.idea/
+.vscode/
 
-# Fonts and logs
-missfont.log
+# PDF (optional – usually keep the final PDF under version control only if needed)
+# *.pdf
