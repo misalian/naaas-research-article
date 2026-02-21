@@ -2,10 +2,12 @@
 
 \usepackage{cite}
 \usepackage{amsmath}
+\newcommand{\remove}[1]{}
+
 
 \title{NewsNet: A Hybrid GraphRAG Framework for Global Sensemaking in Large-Scale News Corpora}
 
-\author{Author names}
+\author{Usaid Ahmed, Danyal Faheem, Muhammad Arshad Islam}
 \date{}
 
 \begin{document}
@@ -14,7 +16,7 @@
 \begin{abstract}
 Abstract goes here.
 \end{abstract}
-
+\remove{
 \section{Introduction}
 
 In the current information-driven era, extracting actionable insights from the staggering volume of unstructured online news data has become an increasingly complex challenge [1]. Traditional news aggregators and Information Retrieval (IR) systems, such as Google News, often rely on keyword-based search and chronological clustering, which frequently fail to capture the deep relational context and causal links between events, entities, and locations [1, 2]. This lack of relational depth necessitates a laborisous manual effort for users to establish a coherent chain of events across multiple articles [3].
@@ -25,7 +27,7 @@ To address these cognitive gaps, we evaluate the proposed \textbf{NewsNet GraphR
 
 The primary objective of this paper is to rigorously evaluate the efficacy of the NewsNet approach against contemporary state-of-the-art (SOTA) benchmarks. We utilize the \textbf{DRAGON (Dynamic RAG Benchmark On News)} framework, which facilitates a dynamic evaluation of RAG systems through Knowledge Graph-based question generation [14, 15]. By testing NewsNet across the four core question types identified in SOTA research—\textbf{simple, set, multi-hop, and conditional}—we aim to demonstrate how graph-based retrieval improves context-aware reasoning and reduces hallucinations compared to standard vector-search baseline RAG systems [16, 17]. Through this evaluation, we contribute to the advancement of explainable and relationally-aware news analytics [18].
 
-
+}
 
 \section{Introduction}
 
@@ -43,6 +45,46 @@ To address these challenges, we propose NewsNet, a hybrid Graph-based Retrieval-
 \end{itemize}
 
 By transforming isolated news articles into an interconnected and interpretable network of entities, events, and relationships, NewsNet supports more transparent, comprehensive, and explainable global sensemaking. This capability directly enhances newsroom intelligence and high-stakes decision support, enabling analysts to move from fragmented information retrieval toward structured, context-aware understanding of complex and evolving news narratives \cite{Mosolygo2025, Jimenez2025}.
+
+\section{Literature Review}
+
+The rapid growth of digital news production has fundamentally transformed information access, but it has simultaneously intensified the difficulty of extracting actionable and coherent knowledge from large-scale, heterogeneous news corpora. While modern information retrieval and neural language models provide strong support for fact-level querying, they remain largely inadequate for higher–level analytical tasks such as understanding evolving narratives, identifying causal dependencies, and synthesizing events across time and sources\cite{Haque2025}. Recent research increasingly frames this challenge as the problem of \emph{global sensemaking} in large textual collections\cite{Mosolygo2025}.
+
+\subsection{Limitations of Baseline Retrieval-Augmented Generation}
+
+Retrieval-Augmented Generation (RAG) has emerged as a practical mechanism for grounding large language models in external knowledge. However, dominant RAG implementations rely almost exclusively on dense vector similarity between isolated text chunks. Consequently, retrieval is driven primarily by local semantic proximity rather than by relational or contextual structure. This phenomenon is commonly described as the \emph{retrieval bottleneck}\cite{Kim2025}, where relevant but indirectly connected evidence remains inaccessible because it does not appear among the top-$k$ nearest neighbors in the embedding space.
+
+Recent studies show that locality-driven retrieval is sufficient for short factual queries, but performs poorly when user intent requires integrating dispersed evidence across documents, actors, and time. Ambiguity resolution and entity disambiguation remain fragile, since vector similarity alone cannot reliably distinguish semantically related but conceptually distinct entities\cite{Edge2025}. These limitations motivate a transition from article-centric retrieval toward structured representations that explicitly encode relationships between entities, events, and topics. For large-scale news analytics, this shift is essential because meaningful interpretation depends on how multiple reports relate to one another rather than on their individual content.
+
+\subsection{Knowledge Graphs for Global Sensemaking and Community-Level Synthesis}
+
+To address the inherent locality of embedding-based retrieval, recent GraphRAG frameworks introduce knowledge graphs as an intermediate semantic layer between documents and language models. By representing entities, events, and their relations as nodes and edges, such systems enable multi-hop reasoning and structured aggregation over the corpus. This transition underpins the emerging notion of global sensemaking, in which a model is expected to summarize, explain, and connect information across the entire document collection rather than respond to individual passages.
+
+A central challenge in graph-based approaches is scalability. News corpora can rapidly generate graphs containing millions of nodes and edges, making direct reasoning over the full graph computationally prohibitive. To mitigate this challenge, recent work such as ReTAG \cite{Kim2025} advocates hierarchical community detection, most notably using the Leiden community detection algorithm. By clustering densely connected subgraphs into coherent topical communities, large graphs can be decomposed into manageable thematic structures. These communities act as higher-level semantic units that support topic-specific reasoning and summarization while substantially reducing computational overhead.
+
+Community-aware GraphRAG systems retrieve and summarize semantically cohesive regions of the graph rather than isolated sentences\cite{Edge2025}. For news analysis, this approach is particularly well suited because major stories naturally form interconnected clusters of actors, locations, and events that evolve over time. As a result, community detection is increasingly regarded as a foundational mechanism for transforming fragmented news content into structured thematic narratives.
+
+\subsection{Causal Reasoning and Event Tracing in News Analytics}
+
+Beyond topical organization, effective news intelligence requires the ability to identify causal chains and temporal dependencies between events. Human analysts typically reconstruct such chains by consulting multiple reports and manually linking causes, triggers, and outcomes, a process that is both time-consuming and error-prone. Recent studies demonstrate that large language models, when applied directly to raw news text, struggle to infer implicit causal relationships, particularly when evidence is distributed across multiple documents.
+
+GraphRAG-Causal\cite{Haque2025} explicitly addresses this limitation by introducing structured causal representations in which nodes correspond to events and edges encode causal or triggering relations. Their findings indicate that causal knowledge graphs significantly improve downstream reasoning and explanation tasks, especially in low-resource and sparse-data settings. These results highlight a fundamental limitation of purely semantic representations: while embeddings capture topical similarity, they do not encode directionality, causation, or temporal order.
+
+Event tracing therefore emerges as a critical requirement for advanced news analytics. Systems must not only retrieve relevant articles, but must also assemble chronologically and causally coherent narratives that explain how situations develop. Hybrid architectures that combine semantic embeddings with explicit graph structures are increasingly recognized as the most effective means of supporting such complex reasoning.
+
+\subsection{Scalability and Real-Time Indexing for Operational Deployment}
+
+Despite their conceptual advantages, knowledge-graph-driven approaches introduce substantial computational challenges\cite{BichTram2025}. Graph construction, embedding generation, and indexing can be prohibitively slow if not carefully engineered. The literature emphasizes the need to combine efficient vector indexing with scalable graph storage in order to support near real-time processing.
+
+Approximate nearest neighbor libraries such as FAISS have become a standard solution for large-scale embedding retrieval\cite{douze2025faiss}, enabling efficient similarity search over millions of vectors and supporting incremental indexing. In parallel, graph database platforms such as Neo4j provide optimized storage and traversal capabilities for large knowledge graphs. Although graph construction and indexing incur an initial computational cost, this cost is amortized over repeated queries and substantially improves inference-time efficiency and system responsiveness.
+
+For newsroom and policy-support environments, where articles arrive continuously and analysts require rapid situational updates, the integration of scalable vector search with persistent graph storage is essential for operational deployment.
+
+\subsection{Positioning NewsNet within the Existing Literature}
+
+The reviewed literature reveals a clear transition from local, passage-level retrieval toward structured, corpus-level reasoning. Traditional information retrieval and baseline RAG systems remain constrained by their reliance on semantic similarity between isolated text segments. Knowledge graphs provide the structural foundation required for multi-hop reasoning, causal inference, and temporal analysis, while hierarchical community detection enables scalable synthesis of large and evolving corpora.
+
+Building upon these advances, NewsNet is designed to directly address a critical operational challenge faced by analysts and decision-makers: the need to search widely across fragmented sources to reconstruct chains of events and their consequences. By integrating dynamic knowledge graph construction, Leiden-based community detection, scalable vector indexing, and event-level tracing within a unified hybrid GraphRAG architecture, NewsNet operationalizes recent research advances for real-world news intelligence. Unlike prior systems that primarily focus on topic-centric summarization or static graph analysis, NewsNet emphasizes continuous event tracing and timeline synthesis, thereby enabling global sensemaking over large-scale and rapidly evolving news corpora.
 
 \bibliography{ref}{}
 \bibliographystyle{IEEEtran}
